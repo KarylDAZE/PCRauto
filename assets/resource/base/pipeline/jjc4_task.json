@@ -9,7 +9,7 @@
 	"开始jjc循环":{
 		"times_limit":4,
 		"is_sub":true,
-		"post_delay":360000,
+		"post_delay":300000,
 		"next":[
 			"竞技场"
 		],

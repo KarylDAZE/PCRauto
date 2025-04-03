@@ -40,12 +40,20 @@
 		"pre_delay":3000,
 		"post_delay":1000,
 		"action": "Click",
+		"next":"EnterArena"
+	},
+	"EnterArena":{
+		"recognition":"OCR",
+		"roi":[655,405,275,132],
+		"expected":"竞技场",
+		"action":"Click",
 		"next":[
 			"jjc防御完成or",
 			"jjc防御完成",
 			"jjc战斗"
 		]
-	},
+	},	
+
 	"jjc战斗":{
 		"timeout":60000,
 		"recognition":"TemplateMatch",
@@ -53,7 +61,7 @@
 		"pre_delay":3000,
 		"post_delay":2870,
 		"action":"Click",
-		"target":[661,514,0,0]
+		"target":[661,200,0,0]
 	},
 	"jjc防御完成":{
 		"is_sub":true,
@@ -82,12 +90,13 @@
 	},
 	"jjc战斗开始":{
 		"is_sub":true,
-		"timeout":120000,
+		"timeout":300000,
 		"recognition":"TemplateMatch",
 		"template":["jjc战斗开始.png","JZ//jz_jjc战斗开始.png"],
 		"action":"Click",
 		"next":[
-			"jjc跳过"
+			"jjc跳过",
+			"战斗jjc下一步"
 		]
 	},
 	"jjc跳过":{
@@ -104,6 +113,7 @@
 	"战斗jjc下一步":{
 		"timeout":240000,
 		"recognition":"OCR",
+		"roi": [966,614,241,88],
 		"expected":"下一步",
 		"action":"Click",
 		"post_delay":8000,
@@ -169,18 +179,25 @@
 	"公主jjc":{
 		"timeout":60000,
 		"recognition":"TemplateMatch",
-		"template":["公主jjc.png","JZ//jz公主jjc.png"],
+		"template":["公主jjc.png","JZ//jz战斗jjc.png"],
 		"action":"Click",
 		"post_delay":3000,
+		"next":"EnterPrincessArena"
+	},
+	"EnterPrincessArena":{
+		"recognition":"OCR",
+		"roi":[951,383,270,152],
+		"expected":"公主竞技场",
+		"action":"Click",
 		"next":[
 			"jjc防御完成or",
 			"jjc防御完成",
 			"开始公主jjc战斗"
-		]	
+		]
 	},
 	"开始公主jjc战斗":{
 		"action":"Click",
-		"target":[661,514,0,0],
+		"target":[661,200,0,0],
 		"post_delay":1000,
 		"next":[
 			"公主jjc选择队伍2"
@@ -209,7 +226,8 @@
 		"template":["jjc战斗开始.png","JZ//jz_jjc战斗开始.png"],
 		"action":"Click",
 		"next":[
-			"公主jjc跳过"
+			"公主jjc跳过",
+			"公主jjc下一步"
 		]
 	},
 	"公主jjc跳过":{
@@ -261,6 +279,7 @@
 	"公主jjc下一步":{
 		"timeout":240000,
 		"recognition":"OCR",
+		"roi": [966,614,241,88],
 		"expected":"下一步",
 		"action":"Click",
 		"post_delay":10000,
@@ -282,8 +301,8 @@
 		"post_delay":2930
 	},
 	"jjc冷却中返回主页面":{
-		"recognition":"TemplateMatch",
-		"template":["jjc冷却中.png","JZ//jz_jjc冷却.png"],
+		"recognition":"OCR",
+		"expected":["冷却中","挑战次数已经达到上限"],
 		"action":"Key",
 		"key":111,
 		"post_delay":1500,
